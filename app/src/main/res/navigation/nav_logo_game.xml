@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_logo_game"
+    app:startDestination="@+id/nav_logo_game_fragment">
+
+
+    <fragment
+        android:id="@+id/nav_logo_game_fragment"
+        android:name="com.mushareb.app.logoGame.view.fragment.LogoGameFragment"
+        android:label="@string/logo_game_fragment_title"
+        tools:layout="@layout/fragment_logo_game" >
+    </fragment>
+
+
+</navigation>
