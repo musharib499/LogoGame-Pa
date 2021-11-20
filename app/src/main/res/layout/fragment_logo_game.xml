@@ -1,55 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="model"
             type="com.mushareb.app.logoGame.viewModel.LogoGameFragmentViewModel" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background">
-    
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_fragment_logo_game"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        thumbnailFull="@{model.logoUrl}"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gl_fragment_logo_game_top"
-        />
 
-   <androidx.appcompat.widget.AppCompatEditText
-       android:id="@+id/et_fragment_logo_game"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:textColor="@color/white"
-       android:textColorHint="@color/white"
-       android:layout_marginTop="10dp"
-       android:inputType="textCapCharacters"
-       android:text="@={model.matchName}"
-       android:onTextChanged="@{(text, start, before, count) -> model.onTextChanged(text)}"
-       android:hint="@string/enter_logo_name"
-       app:layout_constraintStart_toStartOf="@id/img_fragment_logo_game"
-       app:layout_constraintEnd_toEndOf="@id/img_fragment_logo_game"
-       app:layout_constraintTop_toBottomOf="@id/img_fragment_logo_game"
-       >
-       <requestFocus/>
-   </androidx.appcompat.widget.AppCompatEditText>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/cardview_dark_background">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_fragment_logo_game_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".1"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_fragment_logo_game"
+            thumbnailFull="@{model.logoUrl.imgUrl}"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gl_fragment_logo_game_top" />
 
-        />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_fragment_logo_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@{@string/earn_point(model.earnPoint)}"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/img_fragment_logo_game"
+            app:layout_constraintTop_toTopOf="@id/img_fragment_logo_game" />
 
-    
-    
-    
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_fragment_logo_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="@string/enter_logo_name"
+            android:inputType="textCapCharacters"
+            android:onTextChanged="@{(text, start, before, count) -> model.onTextChanged(text)}"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/img_fragment_logo_game"
+            app:layout_constraintStart_toStartOf="@id/img_fragment_logo_game"
+            app:layout_constraintTop_toBottomOf="@id/img_fragment_logo_game">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <requestFocus />
+        </androidx.appcompat.widget.AppCompatEditText>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_fragment_logo_game_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".1"
+
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

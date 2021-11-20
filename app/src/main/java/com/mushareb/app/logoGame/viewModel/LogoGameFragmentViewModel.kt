@@ -3,8 +3,13 @@ package com.mushareb.app.logoGame.viewModel
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.mushareb.app.base.viewModel.BaseViewModel
+import com.mushareb.app.logoGame.model.LogoListItem
 import com.mushareb.app.logoGame.model.logoListResponse
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
 /**
@@ -12,22 +17,34 @@ import kotlinx.coroutines.launch
  * ali.musharib1@gmail.com
  */
 class LogoGameFragmentViewModel : BaseViewModel() {
-    val logoUrl = MutableStateFlow("")
-    private val logoHashMap = HashMap<String, String>()
+    private val delayInterval:Long = 5000
+    val logoUrl = MutableStateFlow(logoListResponse[0])
+    val earnPoint = MutableStateFlow(0)
+    val logoStart = MutableStateFlow(true)
 
     init {
-        logoListResponse.map {
-            logoHashMap.put(it.name ?: "", it.imgUrl ?: "")
-        }
+       onLogoRandom()
+
 
     }
 
+    private fun onLogoRandom(){
+        viewModelScope.launch {
+           logoStart.collect {
+               while (it) {
+                   val value = logoListResponse.random()
+                   logoUrl.emit(value)
+                   delay(delayInterval)
+               }
+           }
+        }
+    }
+
+
     fun onTextChanged(s: CharSequence) {
          viewModelScope.launch {
-             if (logoHashMap.containsKey(s.toString())) {
-                 logoUrl.emit(logoHashMap.getValue(s.toString()))
-             } else {
-                 logoUrl.emit("")
+             if (logoUrl.value.name.equals(s.toString())) {
+                 earnPoint.emit(earnPoint.value+10)
              }
          }
     }

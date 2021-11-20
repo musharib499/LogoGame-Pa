@@ -3,4 +3,5 @@
     <string name="logo_game_fragment_title">Logo Game</string>
     <string name="enter_matching_char">Enter matching char</string>
     <string name="enter_logo_name">Enter logo name</string>
+    <string name="earn_point">Earn Point: %d</string>
 </resources>
